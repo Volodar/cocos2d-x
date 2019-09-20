@@ -316,10 +316,13 @@ void AudioPlayer::rotateBufferThread(int offsetFrame)
                      buffers can then be attached to the playing source using alSourceQueueBuffers. As long as there is
                      always a new buffer to play in the queue, the source will continue to play.
                      */
-                    ALuint bid;
-                    alSourceUnqueueBuffers(_alSource, 1, &bid);
-                    alBufferData(bid, _audioCache->_format, tmpBuffer, framesRead * decoder.getBytesPerFrame(), decoder.getSampleRate());
-                    alSourceQueueBuffers(_alSource, 1, &bid);
+                    if(_audioCache)
+                    {
+                        ALuint bid;
+                        alSourceUnqueueBuffers(_alSource, 1, &bid);
+                        alBufferData(bid, _audioCache->_format, tmpBuffer, framesRead * decoder.getBytesPerFrame(), decoder.getSampleRate());
+                        alSourceQueueBuffers(_alSource, 1, &bid);
+                    }
                 }
             }
 

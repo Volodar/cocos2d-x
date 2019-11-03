@@ -38,7 +38,8 @@ void main()
     else if (u_effectType == 1) // draw outline
     {
         // multipy (1.0 - fontAlpha) to make the inner edge of outline smoother and make the text itself transparent.
-        gl_FragColor = v_fragmentColor * vec4(u_effectColor.rgb, u_effectColor.a * outlineAlpha * (1.0 - fontAlpha));
+        gl_FragColor = vec4(u_effectColor.rgb, u_effectColor.a * outlineAlpha * (1.0 - fontAlpha) * v_fragmentColor.a);
+//        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
     }
     else // draw shadow
     {

@@ -55,6 +55,7 @@ TextureAtlas::TextureAtlas()
     ,_dirty(false)
     ,_texture(nullptr)
     ,_quads(nullptr)
+    ,_VAOname(-1)
 #if CC_ENABLE_CACHE_TEXTURE_DATA
     ,_rendererRecreatedListener(nullptr)
 #endif
@@ -69,7 +70,7 @@ TextureAtlas::~TextureAtlas()
 
     glDeleteBuffers(2, _buffersVBO);
 
-    if (Configuration::getInstance()->supportsShareableVAO())
+    if (Configuration::getInstance()->supportsShareableVAO() && _VAOname != -1)
     {
         glDeleteVertexArrays(1, &_VAOname);
         GL::bindVAO(0);

@@ -261,6 +261,7 @@ void AudioPlayer::rotateBufferThread(int offsetFrame)
     do
     {
         BREAK_IF(!decoder.open(_audioCache->_fileFullPath.c_str()));
+        BREAK_IF(!_audioCache);
 
         uint32_t framesRead = 0;
         const uint32_t framesToRead = _audioCache->_queBufferFrames;

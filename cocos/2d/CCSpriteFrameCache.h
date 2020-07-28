@@ -92,7 +92,7 @@ protected:
     /**
     * used to wrap plist & frame names & SpriteFrames
     */
-    class PlistFramesCache {
+    class CC_DLL PlistFramesCache {
     public:
         PlistFramesCache() { }
         void init() {
@@ -119,7 +119,7 @@ protected:
         inline bool isPlistUsed(const std::string &plist) const;
 
         inline SpriteFrame *at(const std::string &frame);
-        inline Map<std::string, SpriteFrame*>& getSpriteFrames();
+        Map<std::string, SpriteFrame*>& getSpriteFrames();
 
         void markPlistFull(const std::string &plist, bool full) { _isPlistFull[plist] = full; }
         bool isPlistFull(const std::string &plist) const
@@ -286,6 +286,8 @@ public:
     CC_DEPRECATED_ATTRIBUTE SpriteFrame* spriteFrameByName(const std::string&name) { return getSpriteFrameByName(name); }
 
     bool reloadTexture(const std::string& plist);
+    
+    PlistFramesCache& getPlistFramesCache() { return _spriteFramesCache; }
 
 protected:
     // MARMALADE: Made this protected not private, as deriving from this class is pretty useful

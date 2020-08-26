@@ -1517,7 +1517,8 @@ void Label::onDrawShadow(GLProgram* glProgram, const Color4F& shadowColor)
         }
         for (auto&& batchNode : _batchNodes)
         {
-            batchNode->getTextureAtlas()->drawQuads();
+            if(batchNode && batchNode->getTextureAtlas())
+                batchNode->getTextureAtlas()->drawQuads();
         }
     }
     else

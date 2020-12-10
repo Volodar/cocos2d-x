@@ -857,9 +857,11 @@ std::string FileUtils::fullPathForFilename(const std::string &filename) const
         }
     }
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
     if(isPopupNotify()){
-        CCLOG("cocos2d: fullPathForFilename: No file found at %s. Possible missing file.", filename.c_str());
+        cocos2d::log("cocos2d: fullPathForFilename: No file found at %s. Possible missing file.", filename.c_str());
     }
+#endif
 
     // The file wasn't found, return empty string.
     return "";

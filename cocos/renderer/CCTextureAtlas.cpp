@@ -317,6 +317,13 @@ void TextureAtlas::mapBuffers()
 void TextureAtlas::updateQuad(V3F_C4B_T2F_Quad *quad, ssize_t index)
 {
     CCASSERT( index >= 0 && index < _capacity, "updateQuadWithTexture: Invalid index");
+    if(index < 0)
+        return;
+    if(index >= _capacity)
+    {
+        ssize_t quantity = (_capacity + 1) * 4 / 3;
+        resizeCapacity(quantity);
+    }
 
     _totalQuads = MAX( index+1, _totalQuads);
 

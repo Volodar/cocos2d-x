@@ -63,6 +63,7 @@ THE SOFTWARE.
 #include "base/CCAsyncTaskPool.h"
 #include "base/ObjectFactory.h"
 #include "platform/CCApplication.h"
+#include "network/HttpClient.h"
 
 #if CC_ENABLE_SCRIPT_BINDING
 #include "base/CCScriptSupport.h"
@@ -1110,6 +1111,7 @@ void Director::reset()
     GL::invalidateStateCache();
 
     RenderState::finalize();
+    network::HttpClient::destroyInstance();
     
     destroyTextureCache();
 }

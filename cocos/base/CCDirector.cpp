@@ -75,7 +75,7 @@ THE SOFTWARE.
  Default: 0,0 (bottom-left corner)
  */
 #ifndef CC_DIRECTOR_STATS_POSITION
-#define CC_DIRECTOR_STATS_POSITION Director::getInstance()->getVisibleOrigin()
+#define CC_DIRECTOR_STATS_POSITION (Director::getInstance()->getVisibleOrigin() + cocos2d::Point(0, 100))
 #endif // CC_DIRECTOR_STATS_POSITION
 
 using namespace std;

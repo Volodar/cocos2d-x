@@ -86,7 +86,7 @@ public:
      *
      * @param percentage The initial percentage values.
      */
-    void setPercentage(float percentage);
+    virtual void setPercentage(float percentage);
     
     /** Set the sprite as the shape. 
      *

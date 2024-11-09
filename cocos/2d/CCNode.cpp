@@ -1058,7 +1058,7 @@ void Node::removeChildByTag(int tag, bool cleanup/* = true */)
 
     if (child == nullptr)
     {
-        CCLOG("cocos2d: removeChildByTag(tag = %d): child not found!", tag);
+//        CCLOG("cocos2d: removeChildByTag(tag = %d): child not found!", tag);
     }
     else
     {
@@ -1074,7 +1074,7 @@ void Node::removeChildByName(const std::string &name, bool cleanup)
     
     if (child == nullptr)
     {
-        CCLOG("cocos2d: removeChildByName(name = %s): child not found!", name.c_str());
+//        CCLOG("cocos2d: removeChildByName(name = %s): child not found!", name.c_str());
     }
     else
     {

@@ -37,6 +37,7 @@
 
 #include "platform/CCPlatformMacros.h"
 #include "audio/apple/AudioMacros.h"
+#include <functional>
 
 NS_CC_BEGIN
 namespace experimental{

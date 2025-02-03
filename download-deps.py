@@ -44,6 +44,7 @@ from optparse import OptionParser
 from time import time
 from time import sleep
 from sys import stdout
+from cocos2d_x_patches.patch import patch
 
 
 def delete_folder_except(folder_path, excepts):
@@ -393,11 +394,21 @@ def main():
                   opts.force_update, opts.download_only)
 
 
+def patch():
+    if os.path.exists('external/openssl/include/android/openssl'):
+        shutil.rmtree('external/openssl/include/android/openssl')
+    if os.path.exists('external/openssl/prebuilt/android/arm64-v8a'):
+        shutil.rmtree('external/openssl/prebuilt/android/arm64-v8a')
+    shutil.copytree('cocos2d_x_patches/openssl/include', 'external/openssl/include/android/openssl')
+    shutil.copytree('cocos2d_x_patches/openssl/prebuilt/android/arm64-v8a', 'external/openssl/prebuilt/android/arm64-v8a')
+
+
 # -------------- main --------------
 if __name__ == '__main__':
     python_2 = _is_python_version_2()
     try:
         main()
+        patch()
     except Exception as e:
         traceback.print_exc()
         sys.exit(1)

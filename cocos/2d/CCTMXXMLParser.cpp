@@ -431,7 +431,7 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
         // build full path
         std::string imagename = attributeDict["source"].asString();
         tileset->_originSourceImage = imagename;
-
+        
         if (!_externalTilesetFullPath.empty())
         {
             string dir = _externalTilesetFullPath.substr(0, _externalTilesetFullPath.find_last_of('/') + 1);
@@ -446,7 +446,30 @@ void TMXMapInfo::startElement(void* /*ctx*/, const char *name, const char **atts
         {
             tileset->_sourceImage = _resources + (_resources.size() ? "/" : "") + imagename;
         }
-    } 
+        
+        if(tileset->_sourceImage.find("..") != std::string::npos)
+        {
+            std::vector<std::string> dirs;
+            size_t l = 0;
+            size_t k = tileset->_sourceImage.find("/", 1);
+            while(k != std::string::npos)
+            {
+                auto dir = tileset->_sourceImage.substr(l, k-l);
+                if(dir == "/..")
+                    dirs.pop_back();
+                else if(!dir.empty())
+                    dirs.push_back(dir);
+                l = k;
+                k = tileset->_sourceImage.find("/", l+1);
+            }
+            dirs.push_back(tileset->_sourceImage.substr(l));
+            tileset->_sourceImage = "";
+            for(auto& dir : dirs)
+            {
+                tileset->_sourceImage += dir;
+            }
+        }
+    }
     else if (elementName == "data")
     {
         std::string encoding = attributeDict["encoding"].asString();

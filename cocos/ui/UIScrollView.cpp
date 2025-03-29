@@ -811,11 +811,11 @@ void ScrollView::scrollToPercentBothDirection(const Vec2& percent, float timeInS
     
 float ScrollView::getScrolledPercentVertical() const {
     const float minY = getContentSize().height - getInnerContainerSize().height;
-    return (1.f - getInnerContainerPosition().y / minY)*100.f;
+    return minY != 0 ? (1.f - getInnerContainerPosition().y / minY)*100.f : 0;
 }
 float ScrollView::getScrolledPercentHorizontal() const {
     const float minX = getContentSize().width - getInnerContainerSize().width;
-    return getInnerContainerPosition().x / minX * 100.f;
+    return minX != 0 ? getInnerContainerPosition().x / minX * 100.f : 0;
 }
 Vec2 ScrollView::getScrolledPercentBothDirection() const {
     return {getScrolledPercentHorizontal(), getScrolledPercentVertical()};

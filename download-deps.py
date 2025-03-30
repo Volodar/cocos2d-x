@@ -44,7 +44,6 @@ from optparse import OptionParser
 from time import time
 from time import sleep
 from sys import stdout
-from cocos2d_x_patches.patch import patch
 
 
 def delete_folder_except(folder_path, excepts):
@@ -395,12 +394,13 @@ def main():
 
 
 def patch():
-    if os.path.exists('external/openssl/include/android/openssl'):
-        shutil.rmtree('external/openssl/include/android/openssl')
-    if os.path.exists('external/openssl/prebuilt/android/arm64-v8a'):
-        shutil.rmtree('external/openssl/prebuilt/android/arm64-v8a')
-    shutil.copytree('cocos2d_x_patches/openssl/include', 'external/openssl/include/android/openssl')
-    shutil.copytree('cocos2d_x_patches/openssl/prebuilt/android/arm64-v8a', 'external/openssl/prebuilt/android/arm64-v8a')
+    root = os.path.dirname(os.path.abspath(__file__)) + '/'
+    if os.path.exists(root + 'external/openssl/include/android/openssl'):
+        shutil.rmtree(root + 'external/openssl/include/android/openssl')
+    if os.path.exists(root + 'external/openssl/prebuilt/android/arm64-v8a'):
+        shutil.rmtree(root + 'external/openssl/prebuilt/android/arm64-v8a')
+    shutil.copytree(root + 'cocos2d_x_patches/openssl/include', root + 'external/openssl/include/android/openssl')
+    shutil.copytree(root + 'cocos2d_x_patches/openssl/prebuilt/android/arm64-v8a', root + 'external/openssl/prebuilt/android/arm64-v8a')
 
 
 # -------------- main --------------

@@ -794,6 +794,11 @@ void TextField::attachWithIME()
     _textFieldRenderer->attachWithIME();
 }
 
+void TextField::detachWithIME()
+{
+    _textFieldRenderer->detachWithIME();
+}
+
 Widget* TextField::createCloneInstance()
 {
     return TextField::create();

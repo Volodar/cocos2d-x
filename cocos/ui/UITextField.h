@@ -592,6 +592,7 @@ public:
      *
      */
     void attachWithIME();
+    void detachWithIME();
     
     /**
      * @brief Change the text area size.

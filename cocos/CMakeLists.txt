@@ -123,6 +123,7 @@ add_library(cocos2d ${COCOS_SRC})
 add_subdirectory(${COCOS2DX_ROOT_PATH}/external ${ENGINE_BINARY_PATH}/external)
 target_link_libraries(cocos2d external)
 
+
 # add base macro define and compile options
 use_cocos2dx_compile_define(cocos2d)
 use_cocos2dx_compile_options(cocos2d)
@@ -169,4 +170,8 @@ if(WINDOWS)
 #    set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/precheader.cpp" PROPERTIES COMPILE_FLAGS "/Ycprecheader.h")
     # compile c as c++. needed for precompiled header
     set_source_files_properties(${COCOS_SPINE_SRC} base/ccFPSImages.c PROPERTIES LANGUAGE CXX)
+endif()
+
+if(ANDROID)
+    target_link_options(cocos2d PRIVATE "-Wl,-z,max-page-size=16384")
 endif()

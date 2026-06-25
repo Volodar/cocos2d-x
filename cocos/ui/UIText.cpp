@@ -133,6 +133,9 @@ ssize_t Text::getStringLength()const
 
 void Text::setFontSize(float size)
 {
+    if(_fontName.find("roboto_") != std::string::npos){
+        size *= 0.8f;
+    }
     if (_type == Type::SYSTEM)
     {
         _labelRenderer->setSystemFontSize(size);
@@ -155,6 +158,9 @@ float Text::getFontSize()const
 
 void Text::setFontName(const std::string& name)
 {
+    if(name.find("roboto_") != std::string::npos){
+        _fontSize *= 0.8f;
+    }
     if(FileUtils::getInstance()->isFileExist(name))
     {
         TTFConfig config = _labelRenderer->getTTFConfig();
@@ -175,6 +181,7 @@ void Text::setFontName(const std::string& name)
     _fontName = name;
     updateContentSizeWithTextureSize(_labelRenderer->getContentSize());
     _labelRendererAdaptDirty = true;
+    
 }
 
 const std::string& Text::getFontName()const
